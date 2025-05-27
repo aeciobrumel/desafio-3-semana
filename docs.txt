@@ -1,2 +1,33 @@
+Projeto passo a passo>>
+
 criar pasta back e front
-no back iniciar laravel com laravel new app
+
+no backend iniciar laravel com laravel new app
+
+no frontend iniciar o front com react com npm create vite (react puro)
+
+
+//no backend
+        vamos criar as migrations
+            php artisan session:table
+            php artisan make:migration create_user_tables
+            ajustar como deve ser o usuario
+            
+        ajuste do usuario model
+
+        criar seeders de usuario
+            com usuario pré criados no sistema
+
+        instalar samctum para api
+
+
+get/user
+get/user/id
+put/user/id
+post/user
+delete/user
+
+///////////////////////////////////////////////////////////////////////////////////
+
+//php artisan migrate:fresh --seed
+//php artisan db:seed --class=UserSeeder
