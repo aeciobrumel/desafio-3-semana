@@ -1,0 +1,2 @@
+criar pasta back e front
+no back iniciar laravel com laravel new app
