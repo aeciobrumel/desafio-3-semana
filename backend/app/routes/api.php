@@ -18,3 +18,12 @@ Route::get('/users', function () {
 
 
 //->middleware('auth:sanctum');
+Route::post('auth/login','AuthController');
+Route::post('auth/logout','AuthController');
+Route::post('auth/refresh','AuthController');
+
+Route::get('users','UserController');
+Route::post('users','UserController');
+Route::get('users/{id}','UserController');
+Route::put('users/{id}','UserController');
+Route::delete('users/{id}','UserController');
