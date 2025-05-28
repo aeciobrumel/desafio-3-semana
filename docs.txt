@@ -24,6 +24,7 @@ no frontend iniciar o front com react com npm create vite (react puro)
 para manipulação de usuario em json criar o user resource
 
 
+
 get/user
 get/user/id
 put/user/id
