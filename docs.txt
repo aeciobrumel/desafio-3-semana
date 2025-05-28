@@ -21,6 +21,9 @@ no frontend iniciar o front com react com npm create vite (react puro)
         instalar samctum para api
 
 
+para manipulação de usuario em json criar o user resource
+
+
 get/user
 get/user/id
 put/user/id
