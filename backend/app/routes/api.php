@@ -8,14 +8,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 
 
-Route::get('/users/{id}', function (string $id) {
-    $user = User::findOrFail($id);
-    return new UserResource($user);
-});
-
-Route::get('/users', function () {
-    return response()->json(User::all());
-});
 
 
 //->middleware('auth:sanctum');
@@ -23,10 +15,9 @@ Route::post('login',[AuthController::class, 'login']);
 Route::post('logout',[AuthController::class, 'logout']);
 
 
-/*
-Route::get('users','UserController');
-Route::post('users','UserController');
-Route::get('users/{id}','UserController');
-Route::put('users/{id}','UserController');
-Route::delete('users/{id}','UserController');
-*/
+
+Route::get('users',[UserController::class, 'index']);
+Route::post('users',[UserController::class, 'store']);
+Route::get('users/{id}',[UserController::class, 'show']);
+Route::put('users/{id}',[UserController::class, 'update']);
+Route::delete('users/{id}',[UserController::class, 'destroy']);

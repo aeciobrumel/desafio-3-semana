@@ -1,7 +1,7 @@
 import FormLogin from "./components/FormLogin";
 import Userlist from "./components/Userlist";
 import { useEffect } from "react";
-//import {conteudo} from '@/npmedapastadentrodesrc'
+//import {conteudo} from '@/npmedapastadentrodesrc' itens sem default
 function Page() {
   useEffect(() => {
     fetch("http://localhost:8000/api/users")
