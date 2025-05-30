@@ -1,21 +1,16 @@
 import FormLogin from "./components/FormLogin";
 import Userlist from "./components/Userlist";
-import { useEffect } from "react";
+import LoginPage from "./(auth)/signin/LoginPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 //import {conteudo} from '@/npmedapastadentrodesrc' itens sem default
-function Page() {
-  useEffect(() => {
-    fetch("http://localhost:8000/api/users")
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-      });
-  }, []);
-
+function App() {
   return (
-    <div>
-      <h1>Login</h1>
-      <FormLogin />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/signin" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-export default Page;
+export default App;
