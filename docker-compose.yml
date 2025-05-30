@@ -3,22 +3,22 @@ version: "3.8"
 services:
   backend:
     build:
-      context: ./docker/php
+      context: ./backend/app
+      dockerfile: ../../docker/php/Dockerfile
     volumes:
-      - ./backend:/var/www/html
+      - ./backend/app:/var/www/html
     ports:
       - "8000:8000"
     working_dir: /var/www/html
     command: php artisan serve --host=0.0.0.0 --port=8000
-    depends_on:
-      - node
 
-  node:
+  frontend:
     build:
-      context: ./docker/node
-    working_dir: /app
+      context: ./frontend/app
+      dockerfile: ../../docker/node/Dockerfile
     volumes:
-      - ./frontend:/app
+      - ./frontend/app:/app
     ports:
       - "5173:5173"
-    command: npm run dev
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
