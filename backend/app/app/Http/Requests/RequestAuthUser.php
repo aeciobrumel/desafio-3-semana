@@ -19,11 +19,18 @@ class RequestAuthUser extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    protected function prepareForValidation():void{
+        $this->merge([
+            'cpf'=> preg_replace('/\D/', '', $this->cpf),
+        ]);
+    }
+
+
     public function rules(): array
     {
         return [
-            'cpf' => ['required', 'string'],
-            'password' => ['required', 'string'],   
+            'cpf' => 'required|string|digits:11',
+            'password' => 'required',   
         ];
     }
 }
