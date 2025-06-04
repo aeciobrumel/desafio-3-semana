@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 export const HeaderPage = ({
   username,
   iconUrl,
   voltar = false,
   add = false,
 }) => {
+  const navigate = useNavigate();
+  const HandleFormUser = () => {
+    navigate("/formUser");
+  };
+
   return (
     <div className="flex flex-row">
       {voltar && (
@@ -25,7 +32,7 @@ export const HeaderPage = ({
         Olá, {username}!
       </h1>
       {add && (
-        <button className="ml-5">
+        <button className="ml-5" onClick={HandleFormUser}>
           <Link>
             <img
               className=" flex justify-center items-center p-1 bg-verdeclaro rounded-[50px] hover:bg-amber-500 hover:text-white focus:bg-amber-500 focus:text-white focus:outline-none focus:ring-0"

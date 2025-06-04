@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { SideBar } from "../components/sidebar";
 import { UserCard } from "../components/usercard";
 import { HeaderPage } from "../components/headerPage";
+import { Container } from "../components/ui/container";
+import { SectionContent } from "../components/ui/sectionContent";
 
 export const HomePage = () => {
   const [users, setUsers] = useState([]);
@@ -45,14 +47,13 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <main className="min-h-screen flex bg-verdeclaro">
+    <Container>
       <SideBar></SideBar>
-      <section className="bg-white w-screen mt-5 mb-5 mr-5 rounded-[50px] p-10">
+      <SectionContent>
         {user && (
           <HeaderPage
             username={user.name}
             add
-            voltar
             iconUrl={"/users-three.svg"}
           ></HeaderPage>
         )}
@@ -78,7 +79,7 @@ export const HomePage = () => {
               ></UserCard>
             ))}
         </div>
-      </section>
-    </main>
+      </SectionContent>
+    </Container>
   );
 };
