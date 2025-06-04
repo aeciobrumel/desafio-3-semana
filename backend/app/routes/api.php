@@ -15,8 +15,7 @@ Route::post('login',[AuthController::class, 'login']);
 Route::post('logout',[AuthController::class, 'logout']);
 
 
-//Route::middleware('auth:sanctum')->get
-Route::get('users',[UserController::class, 'index']);
+Route::middleware('auth:sanctum')->get('users',[UserController::class, 'index']);
 Route::post('users',[UserController::class, 'store']);
 Route::get('users/{id}',[UserController::class, 'show']);
 Route::put('users/{id}',[UserController::class, 'update']);

@@ -5,8 +5,11 @@ import { UserCard } from "../components/usercard";
 import { HeaderPage } from "../components/headerPage";
 import { Container } from "../components/ui/container";
 import { SectionContent } from "../components/ui/sectionContent";
+import ModalSuccess from "../components/ui/modalSuccess";
 
 export const HomePage = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState(null);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -18,6 +21,12 @@ export const HomePage = () => {
       navigate("/");
     }
   }, []);
+  useEffect(() => {
+    if (user?.first_login == true) {
+      setMessage("Login realizado com sucesso");
+      setOpenModal(true);
+    }
+  }, [user]);
   useEffect(() => {
     const fetchUsers = async () => {
       const token = localStorage.getItem("token");
@@ -31,11 +40,9 @@ export const HomePage = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
         if (!res.ok) {
           throw new Error("Erro ao buscar Usuários");
         }
-
         const data = await res.json();
         setUsers(data.data);
       } catch (error) {
@@ -48,26 +55,24 @@ export const HomePage = () => {
 
   return (
     <Container>
+      {user && (
+        <ModalSuccess
+          open={openModal}
+          setOpen={setOpenModal}
+          title={`Bem vindo, ${user.name}!`}
+          message={message}
+        />
+      )}
       <SideBar></SideBar>
       <SectionContent>
         {user && (
           <HeaderPage
-            username={user.name}
+            title={`Olá, ${user.name}`}
             add
             iconUrl={"/users-three.svg"}
           ></HeaderPage>
         )}
         <div className=" mt-5 bg-cinza max-h-[calc(100vh-180px)] overflow-hidden overflow-y-auto rounded-[50px] ">
-          {users
-            .filter((u) => u.id !== user?.id)
-            .map((u) => (
-              <UserCard
-                className="-z-10"
-                userName={u.name}
-                userEmail={u.email}
-                userAvatar="/user-white.svg"
-              ></UserCard>
-            ))}
           {users
             .filter((u) => u.id !== user?.id)
             .map((u) => (

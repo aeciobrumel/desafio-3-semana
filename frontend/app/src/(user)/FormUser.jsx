@@ -24,7 +24,7 @@ export const FormUser = () => {
       <SectionContent>
         {user && (
           <HeaderPage
-            username={user.name}
+            title={"novo Usuário"}
             voltar
             iconUrl={"/users-three.svg"}
           ></HeaderPage>

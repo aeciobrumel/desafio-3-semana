@@ -1,10 +1,15 @@
 "use client";
 import { useNavigate } from "react-router-dom";
+
 import { StrictMode, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import ModalSuccess from "../ui/modalSuccess";
+import ModalAlert from "../ui/modalAlert";
 
 export const SigninForm = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState(null);
   const [cpfField, setCpfField] = useState("");
   const [passwordField, setPasswordField] = useState("");
   const navigate = useNavigate();
@@ -37,15 +42,24 @@ export const SigninForm = () => {
 
         navigate("/home");
       } else {
-        alert(json.error || "credenciais inválidas");
+        setMessage(json.message || "Credenciais inválidas.");
+        setOpenModal(true);
       }
     } catch (error) {
       console.error("erro ao fazer login: ", error);
-      alert("Erro no login");
+      setMessage("Credenciais inválidas.");
+      setOpenModal(true);
     }
   };
   return (
     <div className="flex flex-col justify-center items-center">
+      <ModalAlert
+        open={openModal}
+        setOpen={setOpenModal}
+        title={"Erro"}
+        message={message}
+      />
+
       <Input
         placeholder="CPF"
         value={cpfField}
