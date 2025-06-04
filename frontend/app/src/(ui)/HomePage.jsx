@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SideBar } from "../components/sidebar";
-import { Link } from "react-router-dom";
 import { UserCard } from "../components/usercard";
+import { HeaderPage } from "../components/headerPage";
 
 export const HomePage = () => {
   const [users, setUsers] = useState([]);
@@ -48,32 +48,35 @@ export const HomePage = () => {
     <main className="min-h-screen flex bg-verdeclaro">
       <SideBar></SideBar>
       <section className="bg-white w-screen mt-5 mb-5 mr-5 rounded-[50px] p-10">
-        <div className="">
-          {user && (
-            <h1 className="text-3xl font-bold">Bem-vindo, {user.name}!</h1>
-          )}
-          <div className=" bg-laranja max-h-[calc(100vh-150px)] overflow-hidden overflow-y-auto rounded-[50px] ">
-            {users
-              .filter((u) => u.id !== user?.id)
-              .map((u) => (
-                <UserCard
-                  className="-z-10"
-                  userName={u.name}
-                  userEmail={u.email}
-                  userAvatar="/user-white.svg"
-                ></UserCard>
-              ))}
-            {users
-              .filter((u) => u.id !== user?.id)
-              .map((u) => (
-                <UserCard
-                  className="-z-10"
-                  userName={u.name}
-                  userEmail={u.email}
-                  userAvatar="/user-white.svg"
-                ></UserCard>
-              ))}
-          </div>
+        {user && (
+          <HeaderPage
+            username={user.name}
+            add
+            voltar
+            iconUrl={"/users-three.svg"}
+          ></HeaderPage>
+        )}
+        <div className=" mt-5 bg-cinza max-h-[calc(100vh-180px)] overflow-hidden overflow-y-auto rounded-[50px] ">
+          {users
+            .filter((u) => u.id !== user?.id)
+            .map((u) => (
+              <UserCard
+                className="-z-10"
+                userName={u.name}
+                userEmail={u.email}
+                userAvatar="/user-white.svg"
+              ></UserCard>
+            ))}
+          {users
+            .filter((u) => u.id !== user?.id)
+            .map((u) => (
+              <UserCard
+                className="-z-10"
+                userName={u.name}
+                userEmail={u.email}
+                userAvatar="/user-white.svg"
+              ></UserCard>
+            ))}
         </div>
       </section>
     </main>
