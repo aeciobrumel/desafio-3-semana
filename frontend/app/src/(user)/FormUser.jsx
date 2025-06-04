@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import { SideBar } from "../components/sidebar";
 import { HeaderPage } from "../components/headerPage";
 import { Container } from "../components/ui/container";
 import { SectionContent } from "../components/ui/sectionContent";
+import { Input } from "../components/ui/input";
 
 export const FormUser = () => {
   const [user, setUser] = useState(null);
@@ -29,6 +29,22 @@ export const FormUser = () => {
             iconUrl={"/users-three.svg"}
           ></HeaderPage>
         )}
+        <div className=" mt-5 bg-cinza max-h-[calc(100vh-180px)] rounded-[50px] p-10">
+          <form className="gap-1 flex flex-col" action="">
+            <div className="flex gap-5">
+              <div>Nome:</div>
+              <input className="bg-white" type="text" placeholder="nome" />
+            </div>
+            <div className="flex gap-5">
+              <div>input</div>
+              <input className="bg-white" type="text" placeholder="nome" />
+            </div>
+            <div className="flex gap-5">
+              <div>input</div>
+              <input className="bg-white" type="text" placeholder="nome" />
+            </div>
+          </form>
+        </div>
       </SectionContent>
     </Container>
   );
