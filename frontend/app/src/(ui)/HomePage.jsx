@@ -13,6 +13,7 @@ export const HomePage = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
@@ -21,6 +22,7 @@ export const HomePage = () => {
       navigate("/");
     }
   }, []);
+
   useEffect(() => {
     if (user?.first_login == true) {
       setMessage("Login realizado com sucesso");
@@ -72,7 +74,27 @@ export const HomePage = () => {
             iconUrl={"/users-three.svg"}
           ></HeaderPage>
         )}
-        <div className=" mt-5 bg-cinza max-h-[calc(100vh-180px)] overflow-hidden overflow-y-auto rounded-[50px] ">
+        <div className=" mt-5 bg-cinza overflow-hidden overflow-y-auto rounded-[50px] ">
+          {users
+            .filter((u) => u.id !== user?.id)
+            .map((u) => (
+              <UserCard
+                className="-z-10"
+                userName={u.name}
+                userEmail={u.email}
+                userAvatar="/user-white.svg"
+              ></UserCard>
+            ))}
+          {users
+            .filter((u) => u.id !== user?.id)
+            .map((u) => (
+              <UserCard
+                className="-z-10"
+                userName={u.name}
+                userEmail={u.email}
+                userAvatar="/user-white.svg"
+              ></UserCard>
+            ))}
           {users
             .filter((u) => u.id !== user?.id)
             .map((u) => (

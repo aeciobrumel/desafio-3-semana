@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const HeaderPage = ({ title, iconUrl, voltar = false, add = false }) => {
   const navigate = useNavigate();
   const HandleFormUser = () => {
-    navigate("/formUser");
+    navigate("/create");
   };
   const HandleBack = () => {
     navigate("/home");
