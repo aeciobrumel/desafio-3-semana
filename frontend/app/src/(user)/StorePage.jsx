@@ -20,16 +20,19 @@ export const StorePage = () => {
     }
   }, []);
   const handlePostUser = async (payload) => {
+    console.log(payload);
     try {
       const res = await fetch("http://localhost:8000/api/users", {
         method: "POST",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
+          "Content-type": "application/json; charset=UTF-8",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(payload),
       });
       const data = await res.json();
+      console.log(data);
+
       if (res.ok) {
         alert("deu bom");
         navigate("/home");

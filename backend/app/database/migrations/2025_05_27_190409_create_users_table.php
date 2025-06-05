@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('cpf',14)->unique();
             $table->string('permission');
             $table->boolean('first_login')->default(true);
+            $table->timestamps();
 
         });
     }

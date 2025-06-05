@@ -25,12 +25,17 @@ export const FormUser = ({ btnName, userEditing, onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("As senhas não coincidem");
+      return;
+    }
+
     const payload = {
       name,
       email,
       cpf: unformatCpf(cpf),
       password,
-      confirmPassword,
       permission,
     };
 
