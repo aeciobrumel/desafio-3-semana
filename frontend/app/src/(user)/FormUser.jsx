@@ -5,6 +5,7 @@ import { HeaderPage } from "../components/headerPage";
 import { Container } from "../components/ui/container";
 import { SectionContent } from "../components/ui/sectionContent";
 import { Input } from "../components/ui/input";
+import { InputForm } from "../components/ui/inputForm";
 
 export const FormUser = () => {
   const [user, setUser] = useState(null);
@@ -29,20 +30,9 @@ export const FormUser = () => {
             iconUrl={"/users-three.svg"}
           ></HeaderPage>
         )}
-        <div className=" mt-5 bg-cinza max-h-[calc(100vh-180px)] rounded-[50px] p-10">
+        <div className=" mt-5 bg-cinza max-h-[calc(100vh-180px)] rounded-[30px] p-5">
           <form className="gap-1 flex flex-col" action="">
-            <div className="flex gap-5">
-              <div>Nome:</div>
-              <input className="bg-white" type="text" placeholder="nome" />
-            </div>
-            <div className="flex gap-5">
-              <div>input</div>
-              <input className="bg-white" type="text" placeholder="nome" />
-            </div>
-            <div className="flex gap-5">
-              <div>input</div>
-              <input className="bg-white" type="text" placeholder="nome" />
-            </div>
+            <InputForm placeholder={"Nome"} type={"text"} />
           </form>
         </div>
       </SectionContent>
