@@ -1,8 +1,4 @@
 import { useEffect, useState } from "react";
-import { SideBar } from "../components/sidebar";
-import { HeaderPage } from "../components/headerPage";
-import { Container } from "../components/ui/container";
-import { SectionContent } from "../components/ui/sectionContent";
 import { InputForm } from "../components/ui/inputForm";
 import { SelectPermission } from "../components/ui/selectPermission";
 
@@ -18,7 +14,7 @@ export const FormUser = ({ btnName, userEditing, onSubmit }) => {
     if (userEditing) {
       setName(userEditing.name || "");
       setEmail(userEditing.email || "");
-      setCpf(userEditing.cpf || "");
+      setCpf(formatCpf(userEditing.cpf) || "");
       setPermission(userEditing.permission || "");
     }
   }, [userEditing]);

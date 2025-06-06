@@ -11,7 +11,7 @@ export const HeaderPage = ({ title, iconUrl, voltar = false, add = false }) => {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row pt-2">
       {voltar && (
         <button className="ml-5" onClick={HandleBack}>
           <Link>

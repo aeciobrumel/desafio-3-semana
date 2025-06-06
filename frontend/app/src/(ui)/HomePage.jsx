@@ -6,13 +6,17 @@ import { HeaderPage } from "../components/headerPage";
 import { Container } from "../components/ui/container";
 import { SectionContent } from "../components/ui/sectionContent";
 import ModalSuccess from "../components/ui/modalSuccess";
-
+import axios from "axios";
 export const HomePage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState(null);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const handleRemoveUser = (id) => {
+    setUsers((prev) => prev.filter((user) => user.id !== id));
+  };
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -37,16 +41,13 @@ export const HomePage = () => {
         return;
       }
       try {
-        const res = await fetch("http://localhost:8000/api/users", {
+        const res = await axios.get("http://localhost:8000/api/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        if (!res.ok) {
-          throw new Error("Erro ao buscar Usuários");
-        }
-        const data = await res.json();
-        setUsers(data.data);
+
+        setUsers(res.data.data);
       } catch (error) {
         console.error("erro ao buscar usuarios:", error);
         navigate("/");
@@ -74,37 +75,61 @@ export const HomePage = () => {
             iconUrl={"/users-three.svg"}
           ></HeaderPage>
         )}
-        <div className=" mt-5 bg-cinza overflow-hidden overflow-y-auto rounded-[50px] ">
+        <div className=" mt-5 bg-cinza overflow-hidden overflow-y-auto rounded-t-[30px] ">
           {users
             .filter((u) => u.id !== user?.id)
-            .map((u) => (
-              <UserCard
-                className="-z-10"
-                userName={u.name}
-                userEmail={u.email}
-                userAvatar="/user-white.svg"
-              ></UserCard>
-            ))}
+            .map((u) => {
+              const isAdmin = user?.permission === "admin";
+              const isDocente = user?.permission === "docente";
+              return (
+                <UserCard
+                  className="-z-10"
+                  userId={u.id}
+                  userName={u.name}
+                  userEmail={u.email}
+                  editbtn={isAdmin || isDocente}
+                  deletebtn={isAdmin}
+                  userAvatar="/user-white.svg"
+                  onDelete={handleRemoveUser}
+                />
+              );
+            })}
           {users
             .filter((u) => u.id !== user?.id)
-            .map((u) => (
-              <UserCard
-                className="-z-10"
-                userName={u.name}
-                userEmail={u.email}
-                userAvatar="/user-white.svg"
-              ></UserCard>
-            ))}
+            .map((u) => {
+              const isAdmin = user?.permission === "admin";
+              const isDocente = user?.permission === "docente";
+              return (
+                <UserCard
+                  className="-z-10"
+                  userId={u.id}
+                  userName={u.name}
+                  userEmail={u.email}
+                  editbtn={isAdmin || isDocente}
+                  deletebtn={isAdmin}
+                  userAvatar="/user-white.svg"
+                  onDelete={handleRemoveUser}
+                />
+              );
+            })}
           {users
             .filter((u) => u.id !== user?.id)
-            .map((u) => (
-              <UserCard
-                className="-z-10"
-                userName={u.name}
-                userEmail={u.email}
-                userAvatar="/user-white.svg"
-              ></UserCard>
-            ))}
+            .map((u) => {
+              const isAdmin = user?.permission === "admin";
+              const isDocente = user?.permission === "docente";
+              return (
+                <UserCard
+                  className="-z-10"
+                  userId={u.id}
+                  userName={u.name}
+                  userEmail={u.email}
+                  editbtn={isAdmin || isDocente}
+                  deletebtn={isAdmin}
+                  userAvatar="/user-white.svg"
+                  onDelete={handleRemoveUser}
+                />
+              );
+            })}
         </div>
       </SectionContent>
     </Container>

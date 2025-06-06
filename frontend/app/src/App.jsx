@@ -1,4 +1,3 @@
-import Userlist from "./components/Userlist";
 import LoginPage from "./(auth)/signin/LoginPage";
 import { HomePage } from "./(ui)/HomePage";
 import { UpdatePage } from "./(user)/UpdatePage";
@@ -14,7 +13,7 @@ function App() {
       <Route path="/signin" element={<LoginPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/create" element={<StorePage />} />
-      <Route path="/update" element={<UpdatePage />} />
+      <Route path="/update/:id" element={<UpdatePage />} />
     </Routes>
   );
 }

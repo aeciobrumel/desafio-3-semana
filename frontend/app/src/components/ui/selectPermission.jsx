@@ -10,8 +10,8 @@ export const SelectPermission = ({ value, onChange }) => {
         >
           <option value=""></option>
           <option value="admin">Administrador</option>
-          <option value="moderador">Moderador</option>
-          <option value="leitor">Leitor</option>
+          <option value="docente">Docente</option>
+          <option value="aluno">Aluno</option>
         </select>
       </div>
     </div>

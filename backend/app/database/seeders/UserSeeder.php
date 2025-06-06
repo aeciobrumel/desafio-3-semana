@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
                     'email' => 'aluno@exemplo.com',
                     'password' => Hash::make('123456'),
                     'permission' => 'aluno',
-                    'cpf' => '333333333333',
+                    'cpf' => '33333333333',
                     'first_login' => true,
                 ],
                 [
