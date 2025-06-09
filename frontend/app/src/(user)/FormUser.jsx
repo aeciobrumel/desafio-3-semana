@@ -50,7 +50,7 @@ export const FormUser = ({ btnName, userEditing, onSubmit }) => {
 
   return (
     <form className="gap-1 flex flex-col items-center" onSubmit={handleSubmit}>
-      <div className=" mt-5 bg-cinza max-h-[calc(100vh-180px)] rounded-[30px] p-5">
+      <div className=" mt-5 bg-cinza max-h-[calc(100vh-80px)] rounded-[30px] p-5">
         <InputForm
           placeholder={"Nome"}
           type={"text"}
@@ -86,7 +86,7 @@ export const FormUser = ({ btnName, userEditing, onSubmit }) => {
         <SelectPermission value={permission} onChange={setPermission} />
       </div>
       <button
-        className="bg-verdeclaro flex justify-center items-center cursor-pointer font-bold text-white  rounded-3xl  pl-2 p-1 mt-5 hover:bg-amber-500 hover:text-white focus:bg-amber-500 focus:text-white focus:outline-none focus:ring-0"
+        className="bg-verdeclaro mb-8 flex justify-center items-center cursor-pointer font-bold text-white  rounded-3xl  pl-2 p-1 mt-5 hover:bg-amber-500 hover:text-white focus:bg-amber-500 focus:text-white focus:outline-none focus:ring-0"
         type="submit"
       >
         {btnName}

@@ -4,18 +4,26 @@ import { SideBar } from "../components/sidebar";
 import { HeaderPage } from "../components/headerPage";
 import { Container } from "../components/ui/container";
 import { SectionContent } from "../components/ui/sectionContent";
-import { InputForm } from "../components/ui/inputForm";
-import { SelectPermission } from "../components/ui/selectPermission";
+import ModalSuccess from "../components/ui/modalSuccess";
 import { FormUser } from "./FormUser";
 import axios from "axios";
 
 export const UpdatePage = () => {
+
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [title, setTitle] = useState(null);
   const [user, setUser] = useState(null);
   const [editUser, setEditUser] = useState(null);
   const token = localStorage.getItem("token");
   const { id } = useParams();
 
   const navigate = useNavigate();
+  const handleCloseModal = () =>{
+          setOpenModal(false);    
+        navigate("/home");
+  }
+
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
@@ -39,28 +47,35 @@ export const UpdatePage = () => {
 
   const handleUpdateUser = async (payload) => {
     try {
-      console.log("payload antes", payload);
       if (!payload.password || payload.password.trim() === "") {
         delete payload.password;
       }
-      console.log("esse é o payload agora", payload);
-
       await axios.put(`http://localhost:8000/api/users/${id}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      alert("deu bom");
-      console.log("Payload enviado para edição:", payload);
-      navigate("/home");
+      setTitle("Alteração")
+      setMessage("usuário Alterado");
+      setOpenModal(true);    
     } catch (error) {
-      alert(error);
+
+      setTitle("Erro de alteração")
+      setMessage("usuário Não foi alterado");
+      setOpenModal(true);        
     }
   };
 
   return (
     <Container>
+      {user && (
+              <ModalSuccess
+                  open={openModal}
+                  setOpen={handleCloseModal}
+                  title={title}
+                  message={message}
+              />
+            )}
       <SideBar></SideBar>
       <SectionContent>
         {user && (

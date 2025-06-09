@@ -34,7 +34,7 @@ export default function ModalSuccess({ open, setOpen, message, title }) {
                     {title}
                   </DialogTitle>
                   <div className="mb-2">
-                    <p className="text-2xl font-semibold text-gray-600">
+                    <p className="text-2xl pt-5 font-semibold text-gray-600">
                       {message}
                     </p>
                   </div>

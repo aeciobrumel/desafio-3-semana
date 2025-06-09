@@ -9,15 +9,22 @@ import ModalSuccess from "../components/ui/modalSuccess";
 import axios from "axios";
 export const HomePage = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [title, setTitle] = useState(false);
   const [message, setMessage] = useState(null);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleRemoveUser = (id) => {
+    setMessage("")
+    setTitle("Usuário deletado")
+    setOpenModal(true)
     setUsers((prev) => prev.filter((user) => user.id !== id));
   };
-
+  const handleCloseModal = () =>{
+          setOpenModal(false);    
+        navigate("/home");
+  }
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
@@ -29,6 +36,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     if (user?.first_login == true) {
+      setTitle(`Bem vindo, ${user.name}`);
       setMessage("Login realizado com sucesso");
       setOpenModal(true);
     }
@@ -61,8 +69,8 @@ export const HomePage = () => {
       {user && (
         <ModalSuccess
           open={openModal}
-          setOpen={setOpenModal}
-          title={`Bem vindo, ${user.name}!`}
+          setOpen={handleCloseModal}
+          title={title}
           message={message}
         />
       )}
@@ -94,42 +102,7 @@ export const HomePage = () => {
                 />
               );
             })}
-          {users
-            .filter((u) => u.id !== user?.id)
-            .map((u) => {
-              const isAdmin = user?.permission === "admin";
-              const isDocente = user?.permission === "docente";
-              return (
-                <UserCard
-                  className="-z-10"
-                  userId={u.id}
-                  userName={u.name}
-                  userEmail={u.email}
-                  editbtn={isAdmin || isDocente}
-                  deletebtn={isAdmin}
-                  userAvatar="/user-white.svg"
-                  onDelete={handleRemoveUser}
-                />
-              );
-            })}
-          {users
-            .filter((u) => u.id !== user?.id)
-            .map((u) => {
-              const isAdmin = user?.permission === "admin";
-              const isDocente = user?.permission === "docente";
-              return (
-                <UserCard
-                  className="-z-10"
-                  userId={u.id}
-                  userName={u.name}
-                  userEmail={u.email}
-                  editbtn={isAdmin || isDocente}
-                  deletebtn={isAdmin}
-                  userAvatar="/user-white.svg"
-                  onDelete={handleRemoveUser}
-                />
-              );
-            })}
+          
         </div>
       </SectionContent>
     </Container>

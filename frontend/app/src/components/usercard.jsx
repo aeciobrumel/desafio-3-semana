@@ -17,7 +17,6 @@ export const UserCard = ({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      alert("usuario excluido com sucesso");
       onDelete(userId);
     } catch (error) {
       alert("erro ao deletar usuario", error);
