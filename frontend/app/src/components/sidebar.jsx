@@ -16,7 +16,7 @@ export const SideBar = () => {
   return (
     <section className=" w-40">
       <div className="flex">
-        <div className="bg-verdeclaro  h-screen w-full flex flex-col items-center gap-10">
+        <div className="bg-verdeclaro h-screen w-full flex flex-col items-center gap-10">
           <div className="pt-5">
             <Logo size={90} />
           </div>
