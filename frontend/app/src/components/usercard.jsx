@@ -8,7 +8,9 @@ export const UserCard = ({
   userAvatar,
   editbtn,
   deletebtn,
+  eyebtn,
   onDelete,
+  impersonateU,
 }) => {
   const handleDeleteUser = async () => {
     try {
@@ -20,6 +22,30 @@ export const UserCard = ({
       onDelete(userId);
     } catch (error) {
       alert("erro ao deletar usuario", error);
+    }
+  };
+  const handleImpersonateUser = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/impersonate",
+        { user_id: impersonateU.id },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      const { access_token, user } = response.data;
+
+      if (!localStorage.getItem("originalToken")) {
+        localStorage.setItem("originalToken", localStorage.getItem("token"));
+      }
+      localStorage.setItem("token", access_token);
+      alert(`voce logou como ${user.name}`);
+      window.location.reload();
+    } catch (error) {
+      alert(`Erro ao tentar login: ${error}`);
     }
   };
 
@@ -35,11 +61,22 @@ export const UserCard = ({
         </div>
       </div>
       <div className=" gap-3 flex-1 flex items-center justify-end">
+        {eyebtn === true && (
+          <button>
+            <img
+              className="cursor-pointer"
+              src="/eye.svg"
+              alt="Eye"
+              onClick={handleImpersonateUser}
+            />
+          </button>
+        )}
+
         {editbtn === true && (
           <Link to={`/update/${userId}`}>
             <button>
               <img
-                className="bg-black p-1 rounded-full"
+                className="bg-black p-1 rounded-full cursor-pointer"
                 src="/note-pencil.svg"
                 alt="EDITAR"
               />
@@ -51,7 +88,7 @@ export const UserCard = ({
           <Link to={`/home`}>
             <button>
               <img
-                className="bg-red-500 p-1 rounded-full "
+                className="bg-red-500 p-1 rounded-full cursor-pointer"
                 src="/trash.svg"
                 alt="DELETAR"
                 onClick={handleDeleteUser}

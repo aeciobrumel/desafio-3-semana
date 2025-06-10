@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RequestStoreUpdateUser;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -40,8 +42,36 @@ class UserController extends Controller
             $user->delete();
             return response()->json(['message' => 'User deleted successfully'], 200);
         }
+
+        public function impersonate(Request $request){
+            $impersonator = Auth::user();
+            $request->validate([
+                'user_id' => 'required|exists:users,id',
+            ]);
+
+            $targetUser = User::findOrFail($request->user_id);
+
+            if($impersonator->permission ==='admin' ){
+        // Admin pode impersonar qualquer um
+            }elseif($impersonator->permission ==="docente"){
+                if($targetUser->permission !=="aluno"){
+                    return response()->json(['error'=> 'so pode impersionar alunos'],401);
+                }
+
+            }
+            else{
+                return response()->json(['error'=> 'aacesso negado'],403);
+            }
+            $token = $targetUser->createToken('impersonated_token')->plainTextToken;
+        
+            return response()->json([
+                'access_token'=>$token,
+                'token_type'=>'Bearer',
+                'user'=>new UserResource($targetUser)
+            ]);
     }
 
 
 
 
+}

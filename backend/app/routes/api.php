@@ -14,7 +14,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('users',[UserController::class, 'store'])->middleware('role:admin,docente');
     Route::get('users/{id}',[UserController::class, 'show'])->middleware('role:admin,docente');
     Route::put('users/{id}',[UserController::class, 'update'])->middleware('role:admin,docente');
-     Route::delete('users/{id}',[UserController::class, 'destroy'])->middleware('role:admin');  
-     Route::get('users',[UserController::class, 'index']);
+    Route::delete('users/{id}',[UserController::class, 'destroy'])->middleware('role:admin');  
+    Route::get('users',[UserController::class, 'index']);
+    Route::post('/impersonate',[UserController::class, 'impersonate'])->middleware('role:admin,docente');
+
     });
 

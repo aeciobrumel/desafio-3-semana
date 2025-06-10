@@ -38,6 +38,7 @@ export const SigninForm = () => {
       const json = await res.json();
       if (res.ok && json.access_token) {
         localStorage.setItem("token", json.access_token);
+        localStorage.setItem("backupToken", json.access_token);
         localStorage.setItem("user", JSON.stringify(json.user));
 
         navigate("/home");

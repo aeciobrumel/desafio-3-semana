@@ -16,15 +16,15 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   const handleRemoveUser = (id) => {
-    setMessage("")
-    setTitle("Usuário deletado")
-    setOpenModal(true)
+    setMessage("");
+    setTitle("Usuário deletado");
+    setOpenModal(true);
     setUsers((prev) => prev.filter((user) => user.id !== id));
   };
-  const handleCloseModal = () =>{
-          setOpenModal(false);    
-        navigate("/home");
-  }
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    navigate("/home");
+  };
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
@@ -92,9 +92,11 @@ export const HomePage = () => {
               return (
                 <UserCard
                   className="-z-10"
+                  impersonateU={u}
                   userId={u.id}
                   userName={u.name}
                   userEmail={u.email}
+                  eyebtn={isAdmin || isDocente}
                   editbtn={isAdmin || isDocente}
                   deletebtn={isAdmin}
                   userAvatar="/user-white.svg"
@@ -102,7 +104,6 @@ export const HomePage = () => {
                 />
               );
             })}
-          
         </div>
       </SectionContent>
     </Container>
