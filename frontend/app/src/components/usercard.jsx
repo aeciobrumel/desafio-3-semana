@@ -48,7 +48,6 @@ export const UserCard = ({
       alert(`voce logou como ${user.name}`);
 
       navigate("/home", { replace: true });
-      window.location.reload();
     } catch (error) {
       alert(`Erro ao tentar login: ${error}`);
     }
