@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export const UserCard = ({
   userName,
@@ -14,6 +15,8 @@ export const UserCard = ({
   impersonateU,
 }) => {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
+
   const handleDeleteUser = async () => {
     try {
       await axios.delete(`http://localhost:8000/api/users/${userId}`, {
@@ -41,10 +44,13 @@ export const UserCard = ({
       const { access_token, user } = response.data;
 
       if (!localStorage.getItem("originalToken")) {
+        localStorage.setItem("originalUser", localStorage.getItem("user"));
         localStorage.setItem("originalToken", localStorage.getItem("token"));
       }
       localStorage.setItem("token", access_token);
       localStorage.setItem("user", JSON.stringify(user));
+
+      setUser(user);
       alert(`voce logou como ${user.name}`);
 
       navigate("/home", { replace: true });

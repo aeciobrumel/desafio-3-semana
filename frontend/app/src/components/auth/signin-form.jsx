@@ -1,10 +1,10 @@
 "use client";
 import { useNavigate } from "react-router-dom";
-
 import { StrictMode, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import ModalSuccess from "../ui/modalSuccess";
+import { useAuth } from "../../contexts/AuthContext";
 import ModalAlert from "../ui/modalAlert";
 
 export const SigninForm = () => {
@@ -13,6 +13,8 @@ export const SigninForm = () => {
   const [cpfField, setCpfField] = useState("");
   const [passwordField, setPasswordField] = useState("");
   const navigate = useNavigate();
+  const { setUser } = useAuth();
+
   function formatCpf(cpf) {
     const onlynum = cpf.replace(/\D/g, "").slice(0, 11);
     return onlynum
@@ -40,6 +42,8 @@ export const SigninForm = () => {
         localStorage.setItem("token", json.access_token);
         localStorage.setItem("backupToken", json.access_token);
         localStorage.setItem("user", JSON.stringify(json.user));
+
+        setUser(json.user);
 
         navigate("/home");
       } else {

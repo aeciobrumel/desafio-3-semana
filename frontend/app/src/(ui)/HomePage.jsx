@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import { SideBar } from "../components/sidebar";
 import { UserCard } from "../components/usercard";
 import { HeaderPage } from "../components/headerPage";
@@ -7,12 +8,13 @@ import { Container } from "../components/ui/container";
 import { SectionContent } from "../components/ui/sectionContent";
 import ModalSuccess from "../components/ui/modalSuccess";
 import axios from "axios";
+
 export const HomePage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [title, setTitle] = useState(false);
   const [message, setMessage] = useState(null);
   const [users, setUsers] = useState([]);
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const handleRemoveUser = (id) => {
@@ -26,13 +28,10 @@ export const HomePage = () => {
     navigate("/home");
   };
   useEffect(() => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      setUser(JSON.parse(userData));
-    } else {
+    if (!user) {
       navigate("/");
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (user?.first_login == true) {
