@@ -28,6 +28,8 @@ class RequestStoreUpdateUser extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255'],
             'cpf' => ['required', 'string', 'max:14'],
             'permission' => ['required', 'string'],
+            'photo' => ['image','mimes:jpeg,png,jpg,svg','max:2048'],
+
         ];
         if ($this->isMethod('post')) {
             $rules['password'] = ['required', 'string', 'min:6' ] ;

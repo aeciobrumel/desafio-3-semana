@@ -9,7 +9,14 @@ export const FormUser = ({ btnName, userEditing, onSubmit }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [permission, setPermission] = useState("");
-
+  const [selectedFile, setSelectedFile]= useState();
+  const handleFileChange=(e)=>{
+    console.log(e.target.files)
+    if(e.target.files && e.target.files > 0){
+      const file = e.target.files[0];
+      setSelectedFile(file)
+    }
+  }
   useEffect(() => {
     if (userEditing) {
       setName(userEditing.name || "");
@@ -84,6 +91,8 @@ export const FormUser = ({ btnName, userEditing, onSubmit }) => {
           />
         </div>
         <SelectPermission value={permission} onChange={setPermission} />
+        <input type="file"
+        onChange={handleFileChange} />
       </div>
       <button
         className="bg-verdeclaro mb-8 flex justify-center items-center cursor-pointer font-bold text-white  rounded-3xl  pl-2 p-1 mt-5 hover:bg-amber-500 hover:text-white focus:bg-amber-500 focus:text-white focus:outline-none focus:ring-0"

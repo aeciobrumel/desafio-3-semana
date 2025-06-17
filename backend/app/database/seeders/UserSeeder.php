@@ -23,6 +23,8 @@ class UserSeeder extends Seeder
                     'permission' => 'admin',
                     'cpf' => '66666666666',
                     'first_login' => false,
+                    'update_password' => false,
+
                 ],
                 [
                     'name' => 'Administrador',
@@ -31,6 +33,8 @@ class UserSeeder extends Seeder
                     'permission' => 'admin',
                     'cpf' => '11111111111',
                     'first_login' => false,
+                    'update_password' => false,
+
 
                 ],
                 [
@@ -40,6 +44,7 @@ class UserSeeder extends Seeder
                     'permission' => 'docente',
                     'cpf' => '22222222222',
                     'first_login' => true,
+                    'update_password' => false,
 
                 ],
                 [
@@ -49,6 +54,8 @@ class UserSeeder extends Seeder
                     'permission' => 'aluno',
                     'cpf' => '33333333333',
                     'first_login' => true,
+                    'update_password' => false,
+
                 ],
                 [
                     'name' => 'teste2',
@@ -57,6 +64,8 @@ class UserSeeder extends Seeder
                     'permission' => 'admin',
                     'cpf' => '44444444444',
                     'first_login' => true,
+                    'update_password' => false,
+
                 ],
                 [
                     'name' => 'teste3',
@@ -65,6 +74,8 @@ class UserSeeder extends Seeder
                     'permission' => 'docente',
                     'cpf' => '55555555555',
                     'first_login' => false,
+                    'update_password' => false,
+
                 ],
             ]);
     }
