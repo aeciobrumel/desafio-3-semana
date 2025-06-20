@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('permission');
             $table->boolean('first_login')->default(true);
             $table->boolean('update_password')->default(false);
+            $table->string('photo')->nullable(); 
             $table->timestamps();
 
         });

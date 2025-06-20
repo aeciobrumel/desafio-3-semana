@@ -9,7 +9,6 @@ import { FormUser } from "./FormUser";
 import axios from "axios";
 
 export const UpdatePage = () => {
-
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState(null);
   const [title, setTitle] = useState(null);
@@ -19,10 +18,10 @@ export const UpdatePage = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const handleCloseModal = () =>{
-          setOpenModal(false);    
-        navigate("/home");
-  }
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    navigate("/home");
+  };
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -50,32 +49,36 @@ export const UpdatePage = () => {
       if (!payload.password || payload.password.trim() === "") {
         delete payload.password;
       }
-      await axios.put(`http://localhost:8000/api/users/${id}`, payload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTitle("Alteração")
+      await axios.post(
+        `http://localhost:8000/api/users/${id}?_method=PUT`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-type": "multipart/form-data",
+          },
+        }
+      );
+      setTitle("Alteração");
       setMessage("usuário Alterado");
-      setOpenModal(true);    
+      setOpenModal(true);
     } catch (error) {
-
-      setTitle("Erro de alteração")
+      setTitle("Erro de alteração", error);
       setMessage("usuário Não foi alterado");
-      setOpenModal(true);        
+      setOpenModal(true);
     }
   };
 
   return (
     <Container>
       {user && (
-              <ModalSuccess
-                  open={openModal}
-                  setOpen={handleCloseModal}
-                  title={title}
-                  message={message}
-              />
-            )}
+        <ModalSuccess
+          open={openModal}
+          setOpen={handleCloseModal}
+          title={title}
+          message={message}
+        />
+      )}
       <SideBar></SideBar>
       <SectionContent>
         {user && (

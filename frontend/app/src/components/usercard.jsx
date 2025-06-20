@@ -29,6 +29,7 @@ export const UserCard = ({
       alert("erro ao deletar usuario", error);
     }
   };
+
   const handleImpersonateUser = async () => {
     try {
       const response = await axios.post(
@@ -63,7 +64,11 @@ export const UserCard = ({
     <div className="flex bg-cinza w-full pl-5 pt-2.5 pb-2.5 pr-5 border-b-1 border-gray-300">
       <div className="flex">
         <div className="bg-laranja flex items-center justify-center rounded-full h-12 w-12 mr-5">
-          <img className="w-full h-full" src={userAvatar} alt={userName} />
+          <img
+            className=" rounded-full w-full h-full"
+            src={userAvatar}
+            alt={userName}
+          />
         </div>
         <div>
           <p className="text-md font-medium text-gray-900 ">{userName}</p>

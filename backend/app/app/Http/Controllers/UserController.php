@@ -15,6 +15,14 @@ class UserController extends Controller
         }
         public function store (RequestStoreUpdateUser $request){
             $validated = $request->validated();
+
+            if (request()->hasFile("photo")) {
+                $path = request()->file("photo")->store("users", 'public');
+                $url = asset("storage/" . $path);
+                $validated['photo'] = $url;
+            }
+
+
             $user = User::create($validated);
             return response()->json(new UserResource($user), 201);
         }
@@ -26,10 +34,15 @@ class UserController extends Controller
             return new UserResource($user);
         }
         public function update(RequestStoreUpdateUser $request,$id){
-            $validated = $request->validated();
             $user = User::find($id);
             if (!$user){
                 return response()->json(['error' => 'User not found'], 404);
+            }
+            $validated = $request->validated();
+            if($request->hasFile('photo')){
+                $path = $request->file('photo')->store('users', 'public');
+                $url = asset('storage/' . $path);
+                $validated['photo'] = $url;
             }
             $user->update($validated);
             return response()->json(new UserResource($user), 200);

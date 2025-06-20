@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                     'cpf' => '66666666666',
                     'first_login' => false,
                     'update_password' => false,
+                    'photo' => '',
 
                 ],
                 [
@@ -34,7 +35,7 @@ class UserSeeder extends Seeder
                     'cpf' => '11111111111',
                     'first_login' => false,
                     'update_password' => false,
-
+                    'photo'=> '',
 
                 ],
                 [
@@ -45,7 +46,7 @@ class UserSeeder extends Seeder
                     'cpf' => '22222222222',
                     'first_login' => true,
                     'update_password' => false,
-
+                    'photo'=> '',
                 ],
                 [
                     'name' => 'Aluno',
@@ -55,7 +56,7 @@ class UserSeeder extends Seeder
                     'cpf' => '33333333333',
                     'first_login' => true,
                     'update_password' => false,
-
+                    'photo'=> '',
                 ],
                 [
                     'name' => 'teste2',
@@ -65,7 +66,7 @@ class UserSeeder extends Seeder
                     'cpf' => '44444444444',
                     'first_login' => true,
                     'update_password' => false,
-
+                    'photo'=> '',
                 ],
                 [
                     'name' => 'teste3',
@@ -75,7 +76,7 @@ class UserSeeder extends Seeder
                     'cpf' => '55555555555',
                     'first_login' => false,
                     'update_password' => false,
-
+                    'photo'=> '',
                 ],
             ]);
     }

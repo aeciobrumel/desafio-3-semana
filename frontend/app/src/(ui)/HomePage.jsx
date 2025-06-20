@@ -15,6 +15,7 @@ export const HomePage = () => {
   const [message, setMessage] = useState(null);
   const [users, setUsers] = useState([]);
   const { user } = useAuth();
+
   const navigate = useNavigate();
 
   const handleRemoveUser = (id) => {
@@ -75,11 +76,10 @@ export const HomePage = () => {
       )}
       <SideBar></SideBar>
       <SectionContent>
-        {user 
-        && (
+        {user && (
           <HeaderPage
             title={`Olá, ${user.name}`}
-            add={user.permission==='admin' || user.permission==="docente"}
+            add={user.permission === "admin" || user.permission === "docente"}
             iconUrl={"/users-three.svg"}
           ></HeaderPage>
         )}
@@ -96,12 +96,10 @@ export const HomePage = () => {
                   userId={u.id}
                   userName={u.name}
                   userEmail={u.email}
-                  eyebtn={
-                    isAdmin || isDocente && u.permission !=="admin"
-                  }
+                  eyebtn={isAdmin || (isDocente && u.permission !== "admin")}
                   editbtn={isAdmin || isDocente}
                   deletebtn={isAdmin}
-                  userAvatar="/user-white.svg"
+                  userAvatar={u.photo ? u.photo : "/user-white.svg"}
                   onDelete={handleRemoveUser}
                 />
               );

@@ -10,16 +10,16 @@ import { FormUser } from "./FormUser";
 import axios from "axios";
 
 export const StorePage = () => {
-  const [user, setUser] = useState(null);  
+  const [user, setUser] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [title, setTitle] = useState(null);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
-   const handleCloseModal = () => {
-        setOpenModal(false);    
-        navigate("/home");
-  }
-   useEffect(() => {
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    navigate("/home");
+  };
+  useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
       setUser(JSON.parse(userData));
@@ -30,10 +30,10 @@ export const StorePage = () => {
 
   const handlePostUser = async (payload) => {
     try {
- 
       await axios.post("http://localhost:8000/api/users", payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       setTitle(`usuário criado!`);
@@ -46,14 +46,14 @@ export const StorePage = () => {
   };
   return (
     <Container>
-       {user && (
-              <ModalSuccess
-                open={openModal}
-                setOpen={handleCloseModal}
-                title={title}
-                message={message}
-              />
-        )}
+      {user && (
+        <ModalSuccess
+          open={openModal}
+          setOpen={handleCloseModal}
+          title={title}
+          message={message}
+        />
+      )}
 
       <SideBar></SideBar>
       <SectionContent>

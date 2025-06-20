@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'photo',
-        'update_password'
+        'update_password',
         'first_login',
         'cpf',
         'permission',

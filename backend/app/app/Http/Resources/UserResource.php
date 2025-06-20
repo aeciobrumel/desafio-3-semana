@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'password' => $this->password,
             'first_login' => $this->first_login,
             'permission' => $this->permission,
+            'photo' => $this->photo,
         ];
     }
 }
